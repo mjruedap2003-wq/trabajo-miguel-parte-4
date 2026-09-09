@@ -35,11 +35,17 @@ else:
 with st.sidebar:
     st.header("⚙️ Configuración")
     filtro = st.radio("Aplicar Filtro", ("Sin Filtro", "Con Filtro"))
-    idioma_ocr = st.selectbox(
-        "Idioma del texto",
-        ("spa", "eng"),
-        format_func=lambda x: "Español" if x == "spa" else "Inglés",
-    )
+    
+    # Mapeo de idioma para OCR y para Audio
+    idioma_opcion = st.selectbox("Idioma del texto", ("Español", "Inglés"))
+
+# Definición de códigos por separado
+if idioma_opcion == "Español":
+    ocr_lang = "spa"
+    tts_lang = "es"
+else:
+    ocr_lang = "eng"
+    tts_lang = "en"
 
 if img_file_buffer is not None:
     # Decodificación de la imagen a OpenCV
@@ -54,12 +60,11 @@ if img_file_buffer is not None:
 
     # Procesamiento para OCR
     img_rgb = cv2.cvtColor(cv2_img, cv2.COLOR_BGR2RGB)
-    texto_detectado = pytesseract.image_to_string(img_rgb, lang=idioma_ocr)
+    texto_detectado = pytesseract.image_to_string(img_rgb, lang=ocr_lang)
 
     st.divider()
     st.subheader("📝 Texto detectado:")
 
-    # Mostrar texto limpio o advertencia si está vacío
     texto_limpio = texto_detectado.strip()
 
     if texto_limpio:
@@ -68,8 +73,8 @@ if img_file_buffer is not None:
         st.subheader("🔊 Audio de lectura:")
         with st.spinner("Generando lectura en voz alta..."):
             try:
-                # Conversión de texto a voz
-                tts = gTTS(text=texto_limpio, lang=idioma_ocr, slow=False)
+                # Usamos tts_lang ("es" o "en") para el sintetizador de voz
+                tts = gTTS(text=texto_limpio, lang=tts_lang, slow=False)
                 fp = io.BytesIO()
                 tts.write_to_fp(fp)
                 fp.seek(0)
