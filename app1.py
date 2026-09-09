@@ -37,7 +37,7 @@ with st.sidebar:
     filtro = st.radio("Aplicar Filtro", ("Sin Filtro", "Con Filtro"))
     
     # Mapeo de idioma para OCR y para Audio
-    idioma_opcion = st.selectbox("Idioma del texto", ("Español", "Inglés"))
+    idioma_opcion = st.selectbox("Idioma del texto, todo depende sí la clase es de español o de inglés", ("Español", "Inglés"))
 
 # Definición de códigos por separado
 if idioma_opcion == "Español":
