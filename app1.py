@@ -15,6 +15,7 @@ st.title("📚 LectoKids: ¡Enseñale a leer a tus pelados!")
 st.write(
     "Toma una foto o sube una imagen con texto para escuchar cómo se lee, la idea es que los niños aprendan a pronunciar las letras con la ayuda del audio."
 )
+#Imagen decorativa
 
 # Selección del método de entrada
 opcion_entrada = st.radio(
