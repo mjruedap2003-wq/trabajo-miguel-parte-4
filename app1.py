@@ -11,18 +11,33 @@ st.set_page_config(
     page_title="LectoKids - Ayudante de Lectura", layout="centered"
 )
 
-st.title("📚 LectoKids: ¡Enseñale a leer a tus pelados!")
+st.title("📚 LectoKids: ¡Aprende a Leer!")
 st.write(
-    "Toma una foto o sube una imagen con texto para escuchar cómo se lee, la idea es que los niños aprendan a pronunciar las letras con la ayuda del audio."
+    "Toma una foto o sube una imagen con texto para escuchar cómo se lee."
 )
-#Imagen decorativa
-imagen_banner = Image.open("Niños_leyendo_con_profe.jpg")
+
+# --- IMAGEN DECORATIVA ---
+# Puedes guardar una imagen llamada "banner.jpg" en la carpeta del repositorio,
+# o usar una imagen desde una URL pública.
+try:
+    # Opción 1: Imagen local cargada en tu repositorio
+    imagen_banner = Image.open("banner.jpg")
     st.image(
         imagen_banner,
         use_container_width=True,
         caption="¡Aprender a leer nunca fue tan fácil!",
     )
-# Selección del método de entrada
+except FileNotFoundError:
+    # Opción 2: Imagen de respaldo desde internet si no se encuentra 'banner.jpg'
+    st.image(
+        "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop",
+        use_container_width=True,
+        caption="¡Explora y aprende escuchando!",
+    )
+
+st.divider()
+
+# --- SELECCIÓN DEL MÉTODO DE ENTRADA ---
 opcion_entrada = st.radio(
     "Selecciona la fuente de la imagen:",
     ("Usar Cámara 📸", "Subir Imagen 📁"),
@@ -41,9 +56,9 @@ else:
 with st.sidebar:
     st.header("⚙️ Configuración")
     filtro = st.radio("Aplicar Filtro", ("Sin Filtro", "Con Filtro"))
-    
+
     # Mapeo de idioma para OCR y para Audio
-    idioma_opcion = st.selectbox("Idioma del texto, todo depende sí la clase es de español o de inglés", ("Español", "Inglés"))
+    idioma_opcion = st.selectbox("Idioma del texto", ("Español", "Inglés"))
 
 # Definición de códigos por separado
 if idioma_opcion == "Español":
@@ -93,8 +108,3 @@ if img_file_buffer is not None:
         st.warning(
             "No se detectó ningún texto claro en la imagen. Intenta enfocar mejor o usar otro ángulo."
         )
-
-
-    
-
-
