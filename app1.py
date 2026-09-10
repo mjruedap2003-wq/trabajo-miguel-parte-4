@@ -16,7 +16,12 @@ st.write(
     "Toma una foto o sube una imagen con texto para escuchar cómo se lee, la idea es que los niños aprendan a pronunciar las letras con la ayuda del audio."
 )
 #Imagen decorativa
-
+imagen_banner = Image.open("Niños_leyendo_con_profe.jpg")
+    st.image(
+        imagen_banner,
+        use_container_width=True,
+        caption="¡Aprender a leer nunca fue tan fácil!",
+    )
 # Selección del método de entrada
 opcion_entrada = st.radio(
     "Selecciona la fuente de la imagen:",
