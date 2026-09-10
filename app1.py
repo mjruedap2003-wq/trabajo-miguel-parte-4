@@ -21,7 +21,7 @@ st.write(
 # o usar una imagen desde una URL pública.
 try:
     # Opción 1: Imagen local cargada en tu repositorio
-    imagen_banner = Image.open("banner.jpg")
+    imagen_banner = Image.open("Niños_leyendo_con_profe.jpg")
     st.image(
         imagen_banner,
         use_container_width=True,
